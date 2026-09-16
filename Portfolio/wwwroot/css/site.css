@@ -37,8 +37,8 @@ body {
 
 .card {
     position: relative;
-    width: 350px;
-    aspect-ratio: 16/9;
+    width: 300px;
+    aspect-ratio: 16/15;
     background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
@@ -254,3 +254,24 @@ body {
         color: #ffffff !important;
         transform: translateY(-3px); /* Lyfter ikonen lite när man hovrar */
     }
+
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-intro {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.hero h3 {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+}
