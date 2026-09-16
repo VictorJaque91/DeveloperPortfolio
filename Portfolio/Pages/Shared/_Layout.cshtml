@@ -5,26 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Portfolio</title>
     <script type="importmap"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Portfolio</a>
+        <nav id="top" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Victor Jaque - Portfolio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Projects">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/About">About Me</a>
                         </li>
                     </ul>
                 </div>
@@ -36,12 +40,38 @@
             @RenderBody()
         </main>
     </div>
+<footer class="footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- Vänster: Copyright & Privacy -->
+            <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                <span class="footer-text">&copy; 2026 - Victor Jaque</span>
+                <span class="mx-2 text-muted">|</span>
+                <a class="footer-link" asp-area="" asp-page="/Privacy">Privacy Policy</a>
+            </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Portfolio - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <!-- Mitten: LinkedIn & GitHub Knappar -->
+            <div class="col-md-4 text-center mb-3 mb-md-0">
+                <!-- Byt ut '#' i href mot dina riktiga länkar sen! -->
+                <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" class="social-icon-btn mx-2" title="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="https://github.com/VictorJaque91" target="_blank" class="social-icon-btn mx-2" title="GitHub">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
+
+            <!-- Höger: Tillbaka till toppen -->
+            <div class="col-md-4 text-center text-md-end">
+                <a href="#top" class="back-to-top-btn text-decoration-none" title="Tillbaka till toppen">
+                <i class="bi bi-arrow-up-circle-fill fs-3"></i>
+                </a>
+            </div>
+
         </div>
-    </footer>
+    </div>
+</footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
