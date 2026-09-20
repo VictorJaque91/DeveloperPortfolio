@@ -12,7 +12,7 @@ namespace Portfolio.Services
             new Project
             {
                 Title = "My Portfolio",
-                Description = "My first ASP.NET Core project",
+                Description = "The site you're looking at right now! Built from scratch with ASP.NET Core and Razor Pages to showcase my journey and projects as a .NET developer.\",",
                 Technologies = new List<string>
                 {
                     "ASP.NET Core",

@@ -7,5 +7,6 @@
         public List<string> Technologies { get; set; } = new();
         public Uri? LiveDemoUrl { get; set; }
         public Uri? GitHubUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

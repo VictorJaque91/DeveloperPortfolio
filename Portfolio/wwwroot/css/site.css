@@ -309,7 +309,7 @@ body > .container {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin-top: 6px;
+    margin-top: 20px;
 }
 .project_technologies {
     margin-top: 10px;
@@ -318,5 +318,74 @@ body > .container {
 .project_links {
     display: flex;
     gap: 10px;
-    margin-top: auto;
+    margin-top: 5px;
+}
+.project-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+@media (max-width: 991px) {
+    .project-showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .project-showcase-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.showcase-card {
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    padding: 45px 35px;
+    min-height: 520px;
+    box-shadow: 0 0 0 1px #ffffff80;
+    display: flex;
+    flex-direction: column;
+}
+
+.showcase-card__header {
+    margin-bottom: 35px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.showcase-card__logo {
+    max-height: 50px;
+    max-width: 100%;
+}
+
+.showcase-card__logo-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.showcase-card__title {
+    color: #222;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.showcase-card__description {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.8;
+    flex-grow: 1;
 }

@@ -1,0 +1,37 @@
+﻿@model Portfolio.Models.Project
+
+<div class="showcase-card">
+	<div class="showcase-card__header">
+		@if (!string.IsNullOrEmpty(Model.ImageUrl))
+		{
+			<img src="@Model.ImageUrl" alt="@Model.Title logotyp" class="showcase-card__logo" />
+		}
+		else
+		{
+			<div class="showcase-card__logo-placeholder">@Model.Title.Substring(0, 1)</div>
+		}
+	</div>
+	<h3 class="showcase-card__title">@Model.Title</h3>
+	<p class="showcase-card__description">@Model.Description</p>
+	@if (Model.Technologies.Any())
+	{
+		<div class="technology-list">
+			@foreach (var technology in Model.Technologies)
+			{
+				<span class="technology">@technology</span>
+			}
+		</div>
+	}
+
+	<div class="project_links">
+		@if (Model.LiveDemoUrl is not null)
+		{
+			<a href="@Model.LiveDemoUrl" target="_blank" class="card__button">Live Demo</a>
+		}
+		@if (Model.GitHubUrl is not null)
+		{
+			<a href="@Model.GitHubUrl" target="_blank" class="card__button secondary">Source Code</a>
+		}
+	</div>
+</div>
+
