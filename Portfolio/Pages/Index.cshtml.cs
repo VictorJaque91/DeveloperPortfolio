@@ -11,7 +11,7 @@ namespace Portfolio.Pages
         public String Role { get; set; } = "System Developer .NET";
 
         public List<Project> Projects { get; set; } = new();
-        public List<string> Technologies { get; set; } = new();
+        public List<string> Technologies { get; set; } = new() { ".NET", "C#", "Web Technologies" };
 
         private readonly ProjectService _projectService;
         public IndexModel(ProjectService projectService)

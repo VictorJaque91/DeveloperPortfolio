@@ -3,19 +3,26 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<section class="hero">
-	<div class="text-center hero-content">
-	    <h1 class="display-4">@Model.Name - Portfolio | @Model.Role</h1>
-	    <p>I am building modern applications with .NET, C#, and web technologies.</p>
-		<h3> My Projects </h3>
 
-		<main class="flex-grow-1">
-			<div class="d-flex flex-wrap justify-content-center gap-4 mb-5">
-			@foreach (var project in Model.Projects)
-			{
-				<partial name="_ProjectCard" model="project" />
-			}
-			</div>
-		</main>
-	</div>
+<section class="hero-landing">
+    <div class="hero-landing__content">
+        <img src="~/images/vj-logo-full.png" alt="Victor Jaque" class="hero-landing__logo" />
+        <p class="hero-landing__tagline">@Model.Role | @string.Join(" | ", Model.Technologies)</p>
+        <div class="hero-landing__divider"></div>
+    </div>
+    <a href="#featured-projects" class="hero-landing__scroll" aria-label="Scrolla ner">
+        <i class="bi bi-chevron-down"></i>
+    </a>
+</section>
+
+<section id="featured-projects" class="py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-6">My Projects</h2>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-5">
+        @foreach (var project in Model.Projects)
+        {
+            <partial name="_ProjectCard" model="project" />
+        }
+    </div>
 </section>

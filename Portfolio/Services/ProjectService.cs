@@ -12,7 +12,7 @@ namespace Portfolio.Services
             new Project
             {
                 Title = "My Portfolio",
-                Description = "The site you're looking at right now! Built from scratch with ASP.NET Core and Razor Pages to showcase my journey and projects as a .NET developer.\",",
+                Description = "The site you're looking at right now! Built from scratch with ASP.NET Core and Razor Pages to showcase my journey and projects as a .NET developer.",
                 Technologies = new List<string>
                 {
                     "ASP.NET Core",
@@ -20,7 +20,9 @@ namespace Portfolio.Services
                     "Web Technologies"
                 },
                 LiveDemoUrl = new Uri("https://victorjaque91.github.io/DeveloperPortfolio/"),
-                GitHubUrl = new Uri("https://github.com/VictorJaque91/DeveloperPortfolio")
+                GitHubUrl = new Uri("https://github.com/VictorJaque91/DeveloperPortfolio"),
+                ImageUrl = "/images/vj-logo.png",
+                PreviewUrl = "/images/portfolio-preview.png"
             },
             new Project
             {

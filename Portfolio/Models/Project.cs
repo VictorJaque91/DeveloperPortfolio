@@ -8,5 +8,6 @@
         public Uri? LiveDemoUrl { get; set; }
         public Uri? GitHubUrl { get; set; }
         public string? ImageUrl { get; set; }
+        public string? PreviewUrl { get; set; }
     }
 }

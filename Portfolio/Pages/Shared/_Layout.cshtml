@@ -9,12 +9,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav id="top" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+        <nav id="top" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark navbar-themed border-bottom box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Victor Jaque - Portfolio</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/images/vj-logo.png" alt="Victor Jaque logotyp" class="navbar-logo" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,13 +27,13 @@
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Index" ? "active" : "")" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Projects">Projects</a>
+                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Projects" ? "active" : "")" asp-area="" asp-page="/Projects">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/About">About Me</a>
+                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/About" ? "active" : "")" asp-area="" asp-page="/About">About Me</a>
                         </li>
                     </ul>
                 </div>
@@ -63,11 +68,11 @@
             </div>
 
             <!-- Höger: Tillbaka till toppen -->
-            <div class="col-md-4 text-center text-md-end">
-                <a href="#top" class="back-to-top-btn text-decoration-none" title="Tillbaka till toppen">
-                <i class="bi bi-arrow-up-circle-fill fs-3"></i>
-                </a>
-            </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="#top" class="back-to-top-btn" title="Tillbaka till toppen">
+                        <i class="bi bi-chevron-up"></i>
+                    </a>
+                </div>
 
         </div>
     </div>

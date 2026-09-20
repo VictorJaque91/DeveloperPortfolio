@@ -24,14 +24,14 @@
 	}
 
 	<div class="project_links">
-		@if (Model.LiveDemoUrl is not null)
-		{
-			<a href="@Model.LiveDemoUrl" target="_blank" class="card__button">Live Demo</a>
-		}
-		@if (Model.GitHubUrl is not null)
-		{
-			<a href="@Model.GitHubUrl" target="_blank" class="card__button secondary">Source Code</a>
-		}
+		 @if (Model.LiveDemoUrl != null)
+    {
+        <a href="@Model.LiveDemoUrl" target="_blank" class="showcase-card__btn showcase-card__btn--primary">Live Demo</a>
+    }
+    @if (Model.GitHubUrl != null)
+    {
+        <a href="@Model.GitHubUrl" target="_blank" class="showcase-card__btn showcase-card__btn--secondary">GitHub</a>
+    }
 	</div>
 </div>
 
