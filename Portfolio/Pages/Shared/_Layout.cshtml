@@ -5,27 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Portfolio</title>
     <script type="importmap"></script>
+
+    <!-- Bootstrap Icons (used for social links, back-to-top arrow, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- Bootstrap framework -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Site-wide custom styles (theme colors, cards, hero, footer, etc.) -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Auto-generated CSS isolation bundle (scoped styles from *.cshtml.css files) -->
     <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
+
+    <!-- Google Fonts: Poppins, used site-wide via site.css (body font-family) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
+        <!-- Main navigation bar. id="top" is the scroll target for the
+             "back to top" button in the footer. -->
         <nav id="top" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark navbar-themed border-bottom box-shadow">
             <div class="container-fluid">
+                <!-- Site logo, links back to the homepage -->
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
                     <img src="~/images/vj-logo.png" alt="Victor Jaque logotyp" class="navbar-logo" />
                 </a>
+
+                <!-- Hamburger toggle for mobile/collapsed view -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- Each link checks the current Razor Page route against its own page path,
+                             and applies the "active" CSS class (cyan color + underline) when it matches.
+                             This is computed per-request, so it always reflects whichever page is
+                             actually being rendered — no manual updates needed when navigating. -->
                         <li class="nav-item">
                             <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Index" ? "active" : "")" asp-area="" asp-page="/Index">Home</a>
                         </li>
@@ -35,49 +55,56 @@
                         <li class="nav-item">
                             <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/About" ? "active" : "")" asp-area="" asp-page="/About">About Me</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Contact" ? "active" : "")" asp-area="" asp-page="/Contact">Contact</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    <!-- Main content area. Each Razor Page's markup is injected here via RenderBody(). -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-<footer class="footer py-5 mt-5">
-    <div class="container">
-        <div class="row align-items-center">
-            
-            <!-- Vänster: Copyright & Privacy -->
-            <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                <span class="footer-text">&copy; 2026 - Victor Jaque</span>
-                <span class="mx-2 text-muted">|</span>
-                <a class="footer-link" asp-area="" asp-page="/Privacy">Privacy Policy</a>
-            </div>
 
-            <!-- Mitten: LinkedIn & GitHub Knappar -->
-            <div class="col-md-4 text-center mb-3 mb-md-0">
-                <!-- Byt ut '#' i href mot dina riktiga länkar sen! -->
-                <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" class="social-icon-btn mx-2" title="LinkedIn">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href="https://github.com/VictorJaque91" target="_blank" class="social-icon-btn mx-2" title="GitHub">
-                    <i class="bi bi-github"></i>
-                </a>
-            </div>
+    <!-- Site footer: copyright/privacy (left), social links (center), back-to-top (right) -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
 
-            <!-- Höger: Tillbaka till toppen -->
+                <!-- Left: Copyright & Privacy Policy link -->
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <span class="footer-text">&copy; 2026 - Victor Jaque</span>
+                    <span class="mx-2 text-muted">|</span>
+                    <a class="footer-link" asp-area="" asp-page="/Privacy">Privacy Policy</a>
+                </div>
+
+                <!-- Center: Social media links (LinkedIn, GitHub) -->
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" class="social-icon-btn mx-2" title="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/VictorJaque91" target="_blank" class="social-icon-btn mx-2" title="GitHub">
+                        <i class="bi bi-github"></i>
+                    </a>
+                </div>
+
+                <!-- Right: Back-to-top button, scrolls to the nav's id="top" anchor -->
                 <div class="col-md-4 text-center text-md-end">
                     <a href="#top" class="back-to-top-btn" title="Tillbaka till toppen">
                         <i class="bi bi-chevron-up"></i>
                     </a>
                 </div>
 
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
+    <!-- Scripts: jQuery, Bootstrap JS bundle, site-specific JS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

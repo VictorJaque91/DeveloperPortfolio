@@ -1,43 +1,200 @@
+/* ==========================================================================
+   BASE / RESET
+   Global defaults inherited by ASP.NET Core's default project template.
+   ========================================================================== */
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for in-page anchors, e.g. the hero scroll-down arrow */
+}
+
+/* Default focus ring for form controls and buttons (accessibility) */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
     background-color: black;
     color: white;
 }
 
-html {
-    scroll-behavior: smooth;
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
 }
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+
+/* ==========================================================================
+   PAGE BACKGROUND
+   Dark navy gradient theme applied to the whole site.
+   ========================================================================== */
 
 body {
     margin: 0px;
     background: linear-gradient(180deg, #050914 0%, #0d1b3a 50%, #050914 100%);
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Loaded via Google Fonts link in _Layout.cshtml */
 }
 
-body > .container {
-    flex: 1 0 auto;
+    body > .container {
+        flex: 1 0 auto;
+    }
+
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
+.navbar-themed {
+    background: linear-gradient(180deg, #0d1b3a 0%, #050914 100%);
+    border-bottom-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+.navbar-logo {
+    height: 42px;
+    width: auto;
+}
+
+/* Base nav link/text colors */
+.nav-item {
+    color: rgb(169, 180, 208);
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-weight: 600;
+}
+
+.navbar, .navbar-nav, .nav-link {
+    color: rgb(169, 180, 208);
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(169, 180, 208);
+}
+
+.navbar-brand {
+    color: rgb(169, 180, 208);
+    font-size: 25px !important;
+    font-weight: 600 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Highlights whichever page is currently active (set dynamically in _Layout.cshtml) */
+.nav-link.active {
+    color: #22d3ee !important;
+    position: relative;
+}
+
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 2px;
+        background: #22d3ee;
+    }
+
+
+/* ==========================================================================
+   HERO SECTION (Index page)
+   Full-bleed dark landing area with logo, tagline, divider, and scroll cue.
+   ========================================================================== */
+
+.hero-landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 35%, #0d1b3a 0%, #050914 55%, #000000 100%);
+    padding: 40px 20px;
+    /* "Breaks out" of the Bootstrap .container so the hero spans the full
+       viewport width, even though it's nested inside the layout's container. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.hero-landing__logo {
+    max-width: 480px;
+    width: 90%;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.hero-landing__tagline {
+    color: #a9b4d0;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.hero-landing__divider {
+    width: 130px;
+    height: 4px;
+    border-radius: 2px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #22d3ee, #a855f7);
+}
+
+/* Bouncing "scroll down" button pinned to the bottom of the hero */
+.hero-landing__scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(139, 92, 246, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a9b4d0;
+    text-decoration: none;
+    animation: bounce-arrow 2s infinite;
+}
+
+    .hero-landing__scroll:hover {
+        color: #ffffff;
+        border-color: #a855f7;
+    }
+
+@keyframes bounce-arrow {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, 8px);
+    }
 }
 
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
+/* ==========================================================================
+   FLIP PROJECT CARDS (used on the Home page, via _ProjectCard.cshtml)
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
+   Split into two elements on purpose:
+   - .card-shell handles background, blur (glassmorphism) and hover scale.
+   - .card handles the 3D flip animation (perspective + rotateX).
+   These MUST stay on separate elements: combining backdrop-filter and a 3D
+   transform on the same element causes rendering glitches in some browsers.
+   ========================================================================== */
 
 .card-shell {
     width: 300px;
@@ -68,19 +225,28 @@ body > .container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    perspective: 1000px;
+    perspective: 1000px; /* Enables the 3D flip effect for .card__content */
 }
+
+    /* Front-of-card fallback icon, shown when a project has no ImageUrl */
     .card svg {
         width: 48px;
         fill: #ffffff;
         transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .card__image {
-        width: 100%;
-        height: 100%;
-    }
+.card-shell:hover svg {
+    scale: 0;
+}
 
+/* Front-of-card image, shown when a project has an ImageUrl */
+.card__image {
+    width: 100%;
+    height: 100%;
+}
+
+/* Back-of-card panel: title, description, tech tags, links.
+   Deliberately solid (no backdrop-filter) — see note above. */
 .card__content {
     position: absolute;
     top: 0;
@@ -97,9 +263,9 @@ body > .container {
     flex-direction: column;
 }
 
-    .card-shell:hover .card__content {
-        transform: rotateX(0deg);
-    }
+.card-shell:hover .card__content {
+    transform: rotateX(0deg);
+}
 
 .card__title {
     margin: 0;
@@ -108,10 +274,6 @@ body > .container {
     font-weight: 700;
 }
 
-    .card:hover svg {
-        scale: 0;
-    }
-
 .card__description {
     margin: 10px 0 10px;
     font-size: 12px;
@@ -119,6 +281,7 @@ body > .container {
     line-height: 1.4;
 }
 
+/* Live Demo / primary action button */
 .card__button {
     padding: 10px 15px;
     border-radius: 8px;
@@ -128,6 +291,7 @@ body > .container {
     text-decoration: none;
 }
 
+/* Source Code / secondary (outline) action button */
 .secondary {
     background: transparent;
     color: #a9b4d0;
@@ -138,60 +302,165 @@ body > .container {
         color: #ffffff;
         border-color: rgba(255, 255, 255, 0.5);
     }
-.nav-item {
-    color: rgb(169, 180, 208);
+
+
+/* ==========================================================================
+   TECHNOLOGY TAGS
+   Small pill-shaped badges listing a project's tech stack.
+   Shared by both flip cards and showcase cards.
+   ========================================================================== */
+
+.technology {
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 2px;
+    border-radius: 20px;
+    background: rgba(139, 92, 246, 0.18);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    color: #d8b4fe;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.project_technologies {
+    margin-top: 10px;
+    color: white;
+}
+
+.project_links {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+
+/* ==========================================================================
+   PROJECT SHOWCASE GRID (used on the Projects page, via _ProjectShowcaseCard.cshtml)
+   Static (non-flip) cards laid out in a responsive grid.
+   ========================================================================== */
+
+.project-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+@media (max-width: 991px) {
+    .project-showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .project-showcase-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.showcase-card {
+    background-color: rgba(13, 27, 58, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 14px;
+    padding: 45px 35px;
+    min-height: 520px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+    .showcase-card:hover {
+        border-color: rgba(139, 92, 246, 0.6);
+        transform: translateY(-4px);
+    }
+
+.showcase-card__header {
+    margin-bottom: 35px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.showcase-card__logo {
+    max-height: 50px;
+    max-width: 100%;
+}
+
+/* Fallback avatar (first letter of project title) shown when no logo is set */
+.showcase-card__logo-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22d3ee, #a855f7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.showcase-card__title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.showcase-card__description {
+    color: #a9b4d0;
+    font-size: 14px;
+    line-height: 1.8;
+    flex-grow: 1; /* Pushes tags/buttons to the bottom regardless of text length */
+}
+
+.showcase-card__btn {
+    padding: 10px 15px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.showcase-card__btn--primary {
+    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    color: white;
     border: none;
-    background: none;
-    font-weight: 600;
 }
 
-.navbar, .navbar-nav, .nav-link {
-    color: rgb(169, 180, 208);
+.showcase-card__btn--secondary {
+    background: transparent;
+    color: #a9b4d0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.navbar-light .navbar-nav .nav-link,
-.navbar-dark .navbar-nav .nav-link {
-    color: rgb(169, 180, 208);
-}
-.navbar-brand {
-    color: rgb(169, 180, 208); 
-    font-size: 25px !important;
-    font-weight: 600 !important;
-    font-family: 'Poppins', sans-serif !important;
-}
+    .showcase-card__btn--secondary:hover {
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.5);
+    }
 
-/* Styling för footern */
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
 .footer {
     background: linear-gradient(180deg, #050914 0%, #0d1b3a 100%);
     width: 100%;
 }
-
-/* Vit färg på copyright-texten */
-.footer-text {
-    color: rgba(255, 255, 255, 0.7); /* Lite mjukare vit än kritvit */
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Ljusgrå länk som blir vit när man hovrar */
-.footer-link {
-    color: rgba(255, 255, 255, 0.7) !important;
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    transition: color 0.3s ease;
-}
-
-    .footer-link:hover {
-        color: #ffffff !important;
-        text-decoration: underline;
-    }
-
-/* Fixar det vertikala strecket */
-.footer .mx-2 {
-    color: rgba(255, 255, 255, 0.3);
-}
-
 
 .footer-text {
     color: rgba(255, 255, 255, 0.6);
@@ -209,20 +478,51 @@ body > .container {
         color: #ffffff !important;
     }
 
-/* Stila sociala medier-knapparna */
+/* Vertical divider "|" between copyright and privacy policy link */
+.footer .mx-2 {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* LinkedIn / GitHub icon buttons */
 .social-icon-btn {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 22px; /* Storlek på ikonerna */
+    font-size: 22px;
     transition: all 0.3s ease;
     display: inline-block;
 }
 
     .social-icon-btn:hover {
         color: #ffffff;
-        transform: translateY(-3px); /* Knappen lyfter lite snyggt när man hovrar */
+        transform: translateY(-3px);
     }
 
-/* Säkerställ att ikontypsnittet laddas och visas i vitt */
+/* "Back to top" button — styled to match the hero's scroll-down indicator */
+.back-to-top-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(139, 92, 246, 0.6);
+    color: #a9b4d0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+    .back-to-top-btn:hover {
+        color: #ffffff;
+        border-color: #a855f7;
+        transform: translateY(-3px);
+    }
+
+    .back-to-top-btn i {
+        color: inherit !important; /* Overrides the global Bootstrap Icons color rule below */
+    }
+
+/* Ensures Bootstrap Icons render correctly and default to white
+   (overridden selectively where needed, e.g. .back-to-top-btn i above) */
 .bi, [class^="bi-"], [class*=" bi-"] {
     font-family: "bootstrap-icons" !important;
     font-style: normal !important;
@@ -234,291 +534,3 @@ body > .container {
     color: #ffffff !important;
 }
 
-.hero {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-}
-
-.hero-intro {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    margin: 0;
-}
-
-.hero h3 {
-    font-size: 2rem;
-    margin-top: 0.5rem;
-}
-
-.technology {
-    display: inline-block;
-    padding: 3px 8px;
-    margin: 2px;
-    border-radius: 20px;
-    background: rgba(139, 92, 246, 0.18);
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    color: #d8b4fe;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-    .technology-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 10px;
-    }
-
-    .technology-tag {
-        padding: 5px 10px;
-        border: 1px solid #777;
-        border-radius: 20px;
-        font-size: 12px;
-        color: #555;
-    }
-
-    .technology-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin-top: 20px;
-    }
-
-    .project_technologies {
-        margin-top: 10px;
-        color: white;
-    }
-
-    .project_links {
-        display: flex;
-        gap: 10px;
-        margin-top: 5px;
-    }
-
-    .project-showcase-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px 60px;
-    }
-
-    @media (max-width: 991px) {
-        .project-showcase-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 600px) {
-        .project-showcase-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .showcase-card {
-        background-color: rgba(13, 27, 58, 0.55);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(139, 92, 246, 0.25);
-        border-radius: 14px;
-        padding: 45px 35px;
-        min-height: 520px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        display: flex;
-        flex-direction: column;
-        transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-
-        .showcase-card:hover {
-            border-color: rgba(139, 92, 246, 0.6);
-            transform: translateY(-4px);
-        }
-
-    .showcase-card__header {
-        margin-bottom: 35px;
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-    }
-
-    .showcase-card__logo {
-        max-height: 50px;
-        max-width: 100%;
-    }
-
-    .showcase-card__logo-placeholder {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #22d3ee, #a855f7);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 20px;
-    }
-
-    .showcase-card__title {
-        color: #ffffff;
-        font-weight: 700;
-        font-size: 22px;
-        margin-bottom: 18px;
-    }
-
-    .showcase-card__description {
-        color: #a9b4d0;
-        font-size: 14px;
-        line-height: 1.8;
-        flex-grow: 1;
-    }
-
-    .showcase-card__btn {
-        padding: 10px 15px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        text-align: center;
-    }
-
-    .showcase-card__btn--primary {
-        background: linear-gradient(90deg, #22d3ee, #a855f7);
-        color: white;
-        border: none;
-    }
-
-    .showcase-card__btn--secondary {
-        background: transparent;
-        color: #a9b4d0;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-        .showcase-card__btn--secondary:hover {
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-    .navbar-themed {
-        background: linear-gradient(180deg, #0d1b3a 0%, #050914 100%);
-        border-bottom-color: rgba(139, 92, 246, 0.2) !important;
-    }
-
-    .navbar-logo {
-        height: 42px;
-        width: auto;
-    }
-
-    .nav-link.active {
-        color: #22d3ee !important;
-        position: relative;
-    }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -6px;
-            height: 2px;
-            background: #22d3ee;
-        }
-
-    .hero-landing {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        text-align: center;
-        background: radial-gradient(ellipse at 50% 35%, #0d1b3a 0%, #050914 55%, #000000 100%);
-        padding: 40px 20px;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-    }
-
-    .hero-landing__logo {
-        max-width: 480px;
-        width: 90%;
-        height: auto;
-        margin-bottom: 24px;
-    }
-
-    .hero-landing__tagline {
-        color: #a9b4d0;
-        font-size: 1.15rem;
-        letter-spacing: 0.5px;
-        margin-bottom: 24px;
-    }
-
-    .hero-landing__divider {
-        width: 130px;
-        height: 4px;
-        border-radius: 2px;
-        margin: 0 auto;
-        background: linear-gradient(90deg, #22d3ee, #a855f7);
-    }
-
-    .hero-landing__scroll {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 1px solid rgba(139, 92, 246, 0.6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #a9b4d0;
-        text-decoration: none;
-        animation: bounce-arrow 2s infinite;
-    }
-
-        .hero-landing__scroll:hover {
-            color: #ffffff;
-            border-color: #a855f7;
-        }
-
-    @keyframes bounce-arrow {
-        0%, 100% {
-            transform: translate(-50%, 0);
-        }
-
-        50% {
-            transform: translate(-50%, 8px);
-        }
-    }
-
-    .back-to-top-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 1px solid rgba(139, 92, 246, 0.6);
-        color: #a9b4d0;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-    }
-
-        .back-to-top-btn:hover {
-            color: #ffffff;
-            border-color: #a855f7;
-            transform: translateY(-3px);
-        }
-
-        .back-to-top-btn i {
-            color: inherit !important;
-        }
