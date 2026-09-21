@@ -534,3 +534,220 @@ body {
     color: #ffffff !important;
 }
 
+/* ==========================================================================
+   ABOUT PAGE
+   ========================================================================== */
+
+.about-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px 20px;
+    text-align: left;
+}
+
+.about-photo-placeholder {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(13, 27, 58, 0.55);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+    .about-photo-placeholder i {
+        font-size: 72px;
+        color: #a9b4d0;
+    }
+
+.about-intro__title {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.about-intro__subtitle {
+    color: #a9b4d0;
+    font-size: 1.05rem;
+}
+
+.about-bio {
+    max-width: 700px;
+    margin: 20px auto 60px;
+    padding: 0 20px;
+    color: #d8dce6;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.about-highlight-card {
+    background: rgba(13, 27, 58, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 14px;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+    .about-highlight-card i {
+        font-size: 28px;
+        color: #22d3ee;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .about-highlight-card p {
+        color: #a9b4d0;
+        font-size: 13px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+@media (max-width: 900px) {
+    .about-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .about-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-highlights {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   CONTACT PAGE
+   ========================================================================== */
+
+.contact-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 20px 100px;
+}
+
+.contact-subtitle {
+    color: #a9b4d0;
+}
+
+.contact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .contact-field label {
+        color: #a9b4d0;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+.contact-input {
+    background: rgba(13, 27, 58, 0.55);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+    .contact-input:focus {
+        outline: none;
+        border-color: rgba(139, 92, 246, 0.7);
+    }
+
+.contact-textarea {
+    resize: vertical;
+}
+
+.contact-error {
+    color: #f87171;
+    font-size: 12px;
+}
+
+.contact-submit {
+    align-self: flex-start;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+}
+
+.contact-alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.contact-alert--success {
+    background: rgba(34, 211, 238, 0.15);
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    color: #a5f3fc;
+}
+
+.contact-alert--error {
+    background: rgba(248, 113, 113, 0.15);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    color: #fca5a5;
+}
+
+.contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.contact-link-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(13, 27, 58, 0.55);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 10px;
+    padding: 14px 24px;
+    color: #a9b4d0;
+    text-decoration: none;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+    .contact-link-card:hover {
+        color: #ffffff;
+        border-color: rgba(139, 92, 246, 0.6);
+        transform: translateY(-3px);
+    }
+
+    .contact-link-card i {
+        font-size: 20px;
+    }

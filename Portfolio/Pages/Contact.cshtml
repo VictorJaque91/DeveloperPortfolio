@@ -1,4 +1,60 @@
 ﻿@page
 @model Portfolio.Pages.ContactModel
 @{
+    ViewData["Title"] = "Contact";
+}
+
+<section class="contact-section">
+    <div class="text-center mb-5">
+        <h1 class="display-5">Get In Touch</h1>
+        <p class="contact-subtitle">Have a project in mind or just want to say hi? Send me a message.</p>
+    </div>
+
+    <div class="contact-layout">
+        <form method="post" class="contact-form">
+            @if (Model.WasSent)
+            {
+                <div class="contact-alert contact-alert--success">Thanks! Your message has been sent — I'll get back to you soon.</div>
+            }
+            @if (Model.SendFailed)
+            {
+                <div class="contact-alert contact-alert--error">Something went wrong sending your message. Please try again, or reach out via LinkedIn/GitHub below.</div>
+            }   
+
+            <div class="contact-field">
+                <label asp-for="Form.Name">Name</label>
+                <input asp-for="Form.Name" class="contact-input" />
+                <span asp-validation-for="Form.Name" class="contact-error"></span>
+            </div>
+
+            <div class="contact-field">
+                <label asp-for="Form.Email">Email</label>
+                <input asp-for="Form.Email" class="contact-input" />
+                <span asp-validation-for="Form.Email" class="contact-error"></span>
+            </div>
+
+            <div class="contact-field">
+                <label asp-for="Form.Message">Message</label>
+                <textarea asp-for="Form.Message" class="contact-input contact-textarea" rows="6"></textarea>
+                <span asp-validation-for="Form.Message" class="contact-error"></span>
+            </div>
+
+            <button type="submit" class="showcase-card__btn showcase-card__btn--primary contact-submit">Send Message</button>
+        </form>
+
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" class="contact-link-card">
+                <i class="bi bi-linkedin"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/VictorJaque91" target="_blank" class="contact-link-card">
+                <i class="bi bi-github"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
