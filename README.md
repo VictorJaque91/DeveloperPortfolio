@@ -281,6 +281,25 @@ Rather than building the entire application at once, the project is being develo
 The long-term goal is to have a fully functional portfolio where the content can be managed through an authenticated administration interface instead of requiring changes directly in the source code.
 
 ---
+££🤖 AI Usage
+
+AI is used as a learning and development aid throughout this project, but not as a replacement for my own development work.
+
+I do not use AI to generate the application's code outright and then simply add it to the project. Instead, I primarily use AI as a tool to:
+
+*Discuss and develop ideas
+*Explore different approaches to solving a problem
+*Ask questions when I do not understand a concept
+*Get explanations of how and why something works
+*Identify possible improvements or alternative solutions
+*Help me reason through problems and decisions
+
+The code in this project is written and implemented by me. When AI suggestions are used as inspiration, I make sure I understand the solution before implementing it.
+
+I also intentionally write the project's documentation, comments and explanatory text myself rather than having AI generate them, as part of the learning process.
+
+The goal is to use AI in a way that supports my learning and problem-solving skills while still making sure that I understand the code and the decisions behind it.
+---
 
 ## 📄 License
 
