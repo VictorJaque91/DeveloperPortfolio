@@ -1,8 +1,47 @@
 ﻿@page
-@model PrivacyModel
+@model Portfolio.Pages.PrivacyModel
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="legal-page">
+    <h1 class="legal-page__title">Privacy Policy</h1>
+    <p class="legal-page__updated">Last updated: September 2026</p>
+
+    <div class="about-bio">
+        <p>
+            This page explains what happens to your information when you use this website,
+            in plain language.
+        </p>
+
+        <h2>What I collect</h2>
+        <p>
+            This site does not use cookies, tracking scripts, or analytics. The only
+            information collected is what you choose to submit through the
+            <a asp-page="/Contact" class="footer-link">Contact form</a>: your name, email
+            address, and message.
+        </p>
+
+        <h2>How it's used</h2>
+        <p>
+            When you submit the contact form, your message is sent directly to my email
+            inbox so I can read and reply to it. Your information is never sold, shared
+            with third parties, or used for anything other than responding to you.
+        </p>
+
+        <h2>How long it's kept</h2>
+        <p>
+            Submitted messages live in my personal email inbox for as long as I keep that
+            conversation, the same as any other email you'd send me directly. This site
+            itself does not store your data in a database.
+        </p>
+
+        <h2>Your rights</h2>
+        <p>
+            If you'd like me to delete a message you've sent, or have any questions about
+            your data, just email me at
+            <a href="mailto:vic.jaq91@protonmail.com" class="footer-link">vic.jaq91@protonmail.com</a>
+            and I'll take care of it.
+        </p>
+    </div>
+</section>
