@@ -38,11 +38,11 @@ namespace Portfolio.Services
             },
             new Project
             {
-                Title = "My future project",
-                Description = "Here will another project be showcased",
+                Title = "Quiz Mobile Game",
+                Description = "I am currently working on a mobile game using Unity and C# alongside my studies. The plan is to develop new features depending on where I am in my studies",
                 Technologies = new List<string>
                 {
-                    "ASP.NET Core",
+                    "Unity",
                     "C#"
                 }
             },
