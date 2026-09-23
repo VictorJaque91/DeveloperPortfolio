@@ -143,6 +143,20 @@ Navigate into the project:
 ```bash
 cd DeveloperPortfolio
 ```
+### Restore NuGet packages
+
+This project uses [MailKit](https://github.com/jstedfast/MailKit) to send emails from the Contact page. NuGet package references are committed to the repository, but the actual package files are not, so they need to be downloaded on each new machine before the project will build:
+
+```bash
+dotnet restore
+```
+
+Alternatively, opening the solution in Visual Studio and building it will usually restore packages automatically.
+
+> ⚠️ If `dotnet restore` fails with an error like `NU1101: Unable to find package MailKit`, your machine's NuGet sources may not include nuget.org (this can happen on a fresh install where only the offline Visual Studio package cache is configured). Run `dotnet nuget list source` to check, and if needed, add it with:
+> ```bash
+> dotnet nuget add source https://api.nuget.org/v3/index.json -n "nuget.org"
+> ```
 
 ### Run the application
 
