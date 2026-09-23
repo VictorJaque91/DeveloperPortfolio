@@ -308,9 +308,8 @@ I do not use AI to generate the application's code outright and then simply add 
 
 The code in this project is written and implemented by me. When AI suggestions are used as inspiration, I make sure I understand the solution before implementing it.
 
-I also intentionally write the project's documentation, comments and explanatory text myself rather than having AI generate them, as part of the learning process.
-
 The goal is to use AI in a way that supports my learning and problem-solving skills while still making sure that I understand the code and the decisions behind it.
+
 ---
 
 ## 📄 License
