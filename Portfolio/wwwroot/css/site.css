@@ -5,6 +5,8 @@
 
 html {
     font-size: 14px;
+    scroll-behavior: smooth;
+    background: black;
 }
 
 @media (min-width: 768px) {
