@@ -201,11 +201,9 @@ Additional sections are planned as the project develops.
 
 Potential future sections include:
 
-* About Me
 * Skills
 * Experience
 * Education
-* Contact
 * More detailed project pages
 
 ---
@@ -216,12 +214,11 @@ Continue improving the visual design and user experience.
 
 Possible improvements include:
 
-* Improved animations
 * Better mobile experience
-* More interactive project cards
 * Project detail pages
 * Dark/light theme
 * Improved navigation
+* Different languages 
 
 ---
 
@@ -259,7 +256,7 @@ The project will evolve as my knowledge and experience with .NET grows.
 | Project cards                 | ✅ Complete |
 | Dynamic project rendering     | ✅ Complete |
 | Reusable project card Partial | ✅ Complete |
-| Custom styling                | 🚧 Ongoing |
+| Custom styling                | ✅ Complete |
 | Database                      | 📋 Planned |
 | Entity Framework Core         | 📋 Planned |
 | Admin authentication          | 📋 Planned |
@@ -293,6 +290,7 @@ I do not use AI to generate the application's code outright and then simply add 
 *Get explanations of how and why something works
 *Identify possible improvements or alternative solutions
 *Help me reason through problems and decisions
+*Create logotypes for each project
 
 The code in this project is written and implemented by me. When AI suggestions are used as inspiration, I make sure I understand the solution before implementing it.
 
