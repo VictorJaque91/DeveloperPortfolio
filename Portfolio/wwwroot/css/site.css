@@ -39,11 +39,17 @@ html {
    Dark navy gradient theme applied to the whole site.
    ========================================================================== */
 
+/* Fonts are loaded via the Google Fonts link in _Layout.cshtml */
+:root {
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
 body {
     margin: 0px;
     background: linear-gradient(180deg, #050914 0%, #0d1b3a 50%, #050914 100%);
     color: white;
-    font-family: 'Poppins', sans-serif; /* Loaded via Google Fonts link in _Layout.cshtml */
+    font-family: var(--font-body);
 }
 
     body > .container {
@@ -65,14 +71,15 @@ body {
     width: auto;
 }
 
-/* Base nav link/text colors */
+/* Base nav link/text colors - monospace, "code style" */
 .nav-item {
     color: rgb(169, 180, 208);
     text-decoration: none;
-    font-size: 25px;
+    font-family: var(--font-mono);
+    font-size: 20px;
     border: none;
     background: none;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .navbar, .navbar-nav, .nav-link {
@@ -88,24 +95,23 @@ body {
     color: rgb(169, 180, 208);
     font-size: 25px !important;
     font-weight: 600 !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--font-body) !important;
 }
 
 /* Highlights whichever page is currently active (set dynamically in _Layout.cshtml) */
 .nav-link.active {
     color: #22d3ee !important;
-    position: relative;
 }
 
-    .nav-link.active::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -6px;
-        height: 2px;
-        background: #22d3ee;
-    }
+/* The purple "./" in front of the active page, like a path in a terminal */
+.nav-prefix {
+    display: none;
+    color: #a855f7;
+}
+
+.nav-link.active .nav-prefix {
+    display: inline;
+}
 
 
 /* ==========================================================================
@@ -139,8 +145,9 @@ body {
 
 .hero-landing__tagline {
     color: #a9b4d0;
-    font-size: 1.15rem;
-    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    letter-spacing: 0;
     margin-bottom: 24px;
 }
 
@@ -318,6 +325,7 @@ body {
     background: rgba(139, 92, 246, 0.18);
     border: 1px solid rgba(139, 92, 246, 0.4);
     color: #d8b4fe;
+    font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 500;
 }
@@ -464,13 +472,13 @@ body {
 
 .footer-text {
     color: rgba(255, 255, 255, 0.6);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .footer-link {
     color: rgba(255, 255, 255, 0.6) !important;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: color 0.3s ease;
 }
 
@@ -637,6 +645,107 @@ body {
 }
 
 /* ==========================================================================
+   SKILLS (About page)
+   ========================================================================== */
+
+.skills {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.skills__title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.skills__intro {
+    color: #a9b4d0;
+    text-align: center;
+    max-width: 60ch;
+    margin: 0 auto 30px;
+}
+
+/* As many columns as fit, each at least 280px - no media queries needed */
+.skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 20px;
+}
+
+.skill-category {
+    background: rgba(13, 27, 58, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.skill-category__title {
+    font-size: 1.2rem;
+    color: #22d3ee;
+    margin-bottom: 18px;
+}
+
+.skill-category__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skill__label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 6px;
+}
+
+.skill__name {
+    color: #d8dce6;
+    font-weight: 500;
+}
+
+.skill__level {
+    color: #a9b4d0;
+    font-size: 0.85rem;
+}
+
+.skill__track {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+/* --skill-scale is set per bar by the server (0.2 - 1).
+   Without JavaScript the bars are simply shown full - nothing breaks. */
+.skill__fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    border-radius: inherit;
+    transform-origin: left;
+    transform: scaleX(var(--skill-scale));
+    transition: transform 1s ease-out;
+}
+
+/* Added by site.js: start empty, then fill when scrolled into view */
+.skill-category.is-pending .skill__fill {
+    transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skill__fill {
+        transition: none;
+    }
+}
+
+/* ==========================================================================
    CONTACT PAGE
    ========================================================================== */
 
@@ -680,7 +789,7 @@ body {
     border-radius: 8px;
     padding: 12px 14px;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
 }
 
@@ -701,7 +810,7 @@ body {
 .contact-submit {
     align-self: flex-start;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     margin-top: 10px;
 }
 

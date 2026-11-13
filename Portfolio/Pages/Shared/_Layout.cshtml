@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="/images/vj-logo.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Portfolio</title>
@@ -18,12 +19,25 @@
     <!-- Auto-generated CSS isolation bundle (scoped styles from *.cshtml.css files) -->
     <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
 
-    <!-- Google Fonts: Poppins, used site-wide via site.css (body font-family) -->
+    <!-- Google Fonts: Inter (body text) and JetBrains Mono (nav, tagline, tags).
+         Set as CSS variables in site.css: --font-body and --font-mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    @{
+        // Current Razor Page route, e.g. "/Projects" - used to mark the active nav link
+        var currentPage = ViewContext.RouteData.Values["page"] as string;
+
+        var navItems = new[]
+        {
+            (Page: "/Index", Label: "home"),
+            (Page: "/Projects", Label: "projects"),
+            (Page: "/About", Label: "about"),
+            (Page: "/Contact", Label: "contact")
+        };
+    }
     <header>
         <!-- Main navigation bar. id="top" is the scroll target for the
              "back to top" button in the footer. -->
@@ -42,22 +56,20 @@
 
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <!-- Each link checks the current Razor Page route against its own page path,
-                             and applies the "active" CSS class (cyan color + underline) when it matches.
-                             This is computed per-request, so it always reflects whichever page is
-                             actually being rendered — no manual updates needed when navigating. -->
-                        <li class="nav-item">
-                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Index" ? "active" : "")" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Projects" ? "active" : "")" asp-area="" asp-page="/Projects">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/About" ? "active" : "")" asp-area="" asp-page="/About">About Me</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @(((string)ViewContext.RouteData.Values["page"]) == "/Contact" ? "active" : "")" asp-area="" asp-page="/Contact">Contact</a>
-                        </li>
+                        @* One link per item in navItems. The active page gets the "active" class,
+                           aria-current="page" for screen readers, and a "./" prefix
+                           (only shown on the active link, see .nav-prefix in site.css).
+                           The prefix is aria-hidden so it isn't read out as "dot slash". *@
+                        @foreach (var item in navItems)
+                        {
+                            var isActive = currentPage == item.Page;
+
+                            <li class="nav-item">
+                                <a class="nav-link @(isActive ? "active" : null)"
+                                   aria-current="@(isActive ? "page" : null)"
+                                   asp-area="" asp-page="@item.Page"><span class="nav-prefix" aria-hidden="true">./</span>@item.Label</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
