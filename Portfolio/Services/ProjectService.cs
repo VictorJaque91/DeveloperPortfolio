@@ -1,5 +1,4 @@
 ﻿using Portfolio.Models;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Portfolio.Services
 {
@@ -19,7 +18,7 @@ namespace Portfolio.Services
                     "C#",
                     "Web Technologies"
                 },
-                LiveDemoUrl = new Uri("https://victorjaque91.github.io/DeveloperPortfolio/"),
+                LiveDemoUrl = new Uri("https://victorjaque.site"),
                 GitHubUrl = new Uri("https://github.com/VictorJaque91/DeveloperPortfolio"),
                 ImageUrl = "/images/vj-logo.png",
                 PreviewUrl = "/images/portfolio-preview.png"
@@ -48,24 +47,18 @@ namespace Portfolio.Services
             },
             new Project
             {
-                Title = "My future project",
-                Description = "Here will another project be showcased",
+                Title = "SE*Bekiles Cattery",
+                Description = "A rebuild of my mom's cat breeding website, moved from Webnode to a custom React site. Keeps the look she loves, but cleaner and easier to navigate. A PocketBase backend gives her an admin page where she can add cats and health tests herself.",
                 Technologies = new List<string>
                 {
-                    "ASP.NET Core",
-                    "C#"
-                }
+                    "React",
+                    "JavaScript",
+                    "Vite",
+                    "PocketBase"
+                },
+                LiveDemoUrl = new Uri("https://www.sebekiles.se"),
+                GitHubUrl = new Uri("https://github.com/VictorJaque91/SEBekiles")
             },
-            new Project
-            {
-                Title = "My future project",
-                Description = "Here will another project be showcased",
-                Technologies = new List<string>
-                {
-                    "ASP.NET Core",
-                    "C#"
-                }
-            }
         };
         }
     }
