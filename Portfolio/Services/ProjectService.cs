@@ -26,20 +26,23 @@ namespace Portfolio.Services
             },
             new Project
             {
-                Title = "My future project",
-                Description = "Here will my next project be showcased",
+                Title = "Library",
+                Description = "A simple library management system built with C# and .NET which was developed in school. My first application that I will use WPF",
                 Technologies = new List<string>
                 {
-                    "C#"
-                }
+                    "C#",
+                    ".NET",
+                    "WPF"
+                },
+                GitHubUrl = new Uri("https://github.com/VictorJaque91/Library")
             },
             new Project
             {
-                Title = "My future project",
-                Description = "Here will another project be showcased",
+                Title = "Quiz Mobile Game",
+                Description = "I am currently working on a mobile game using Unity and C# alongside my studies. The plan is to develop new features depending on where I am in my studies",
                 Technologies = new List<string>
                 {
-                    "ASP.NET Core",
+                    "Unity",
                     "C#"
                 }
             },
