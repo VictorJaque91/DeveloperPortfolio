@@ -15,16 +15,21 @@ This project is also being used as a learning project to explore **ASP.NET Core,
 The portfolio currently includes:
 
 * Personal hero section with name and developer role
-* Project showcase section
-* Dynamic project cards
+* Light and dark theme with a toggle (remembers your choice, follows the OS setting by default)
+* Home page project showcase with dynamic, reusable project cards
+* Dedicated Projects page with technology filtering and "Read more" detail dialogs
+* About page with a bio and an animated skills section
+* Contact page with a working email form (MailKit)
 * Project information including:
 
   * Title
   * Description
   * Technologies used
+  * Live demo link
   * GitHub repository link
-* Reusable Razor Partial for project cards
-* Responsive layout
+  * Project image / logo
+* Reusable Razor Partials for project cards
+* Responsive layout with accessible, keyboard-friendly navigation
 * Custom styling and portfolio design
 
 Projects are currently defined in the application's code and passed to the Razor Page through the PageModel.
@@ -215,7 +220,7 @@ Additional sections are planned as the project develops.
 
 Potential future sections include:
 
-* Skills
+* Skills ✅ (done)
 * Experience
 * Education
 * More detailed project pages
@@ -229,8 +234,8 @@ Continue improving the visual design and user experience.
 Possible improvements include:
 
 * Better mobile experience
-* Project detail pages
-* Dark/light theme
+* Project detail pages (partly done via "Read more" dialogs)
+* Dark/light theme ✅ (done)
 * Improved navigation
 * Different languages 
 
@@ -271,6 +276,12 @@ The project will evolve as my knowledge and experience with .NET grows.
 | Dynamic project rendering     | ✅ Complete |
 | Reusable project card Partial | ✅ Complete |
 | Custom styling                | ✅ Complete |
+| Light / dark theme            | ✅ Complete |
+| Projects page & tech filter   | ✅ Complete |
+| About page & skills section   | ✅ Complete |
+| Contact page & email form     | ✅ Complete |
+| Project detail dialogs        | ✅ Complete |
+| Project images / logos        | ✅ Complete |
 | Database                      | 📋 Planned |
 | Entity Framework Core         | 📋 Planned |
 | Admin authentication          | 📋 Planned |
