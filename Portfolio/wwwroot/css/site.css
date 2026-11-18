@@ -410,6 +410,7 @@ body {
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* never let long content spill past the card edge */
 }
 
 .card-shell:hover .card__content,
@@ -427,21 +428,39 @@ body {
 }
 
 .card__description {
-    margin: 10px 0 10px;
+    margin: 8px 0;
     font-size: 12px;
     color: var(--color-text-soft);
     line-height: 1.4;
+    /* Clamp long descriptions so the buttons always fit inside the card */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-/* Live Demo / primary action button */
 .card__button {
     padding: 10px 15px;
     border-radius: 8px;
-    background: var(--gradient-accent);
-    border: none;
-    color: var(--color-on-accent);
+    border: 1px solid transparent;
     text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
+
+/* Live Demo / primary action: an outline at rest, fills with the accent on hover
+   (no solid accent block until you interact with it) */
+.card__button:not(.secondary) {
+    background: transparent;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+    .card__button:not(.secondary):hover {
+        background: var(--gradient-accent);
+        border-color: transparent;
+        color: var(--color-on-accent);
+    }
 
 /* Source Code / secondary (outline) action button */
 .secondary {
@@ -490,7 +509,8 @@ body {
 .project_links {
     display: flex;
     gap: 8px; /* Keep all buttons on one row, even when there are three */
-    margin-top: 5px;
+    margin-top: auto; /* pin the buttons to the bottom of the card */
+    padding-top: 10px;
 }
 
 
@@ -678,6 +698,16 @@ body {
 
     .back-to-top-btn i {
         color: inherit !important; /* Overrides the global Bootstrap Icons color rule below */
+    }
+
+/* On the light theme the muted text colour is a slate blue that clashes with the
+   warm greige circle; use the warm accent so the arrow matches the ring. */
+:root[data-theme="light"] .back-to-top-btn {
+    color: var(--color-accent);
+}
+
+    :root[data-theme="light"] .back-to-top-btn:hover {
+        color: var(--color-accent-2);
     }
 
 /* Ensures Bootstrap Icons render correctly and default to the text color
