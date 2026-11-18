@@ -12,6 +12,11 @@ namespace Portfolio.Models
         public string? ImageUrl { get; set; }
         public string? PreviewUrl { get; set; }
 
+        // Optional light-theme variants. When set, the cards swap to these on the
+        // light theme (handled in the partials via the .theme-img CSS rules).
+        public string? ImageUrlLight { get; set; }
+        public string? PreviewUrlLight { get; set; }
+
         // Longer text for the "Read more" dialog on the Projects page
         public string Details { get; set; } = "";
         public List<string> Highlights { get; set; } = new();

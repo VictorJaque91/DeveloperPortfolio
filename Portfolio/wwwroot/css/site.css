@@ -246,18 +246,22 @@ body {
     margin-bottom: 24px;
 }
 
-/* Theme-swapped logos: the bright cyan logo for dark, the warm greige one for
-   light. Only the matching variant is shown; the other is display:none (so it
-   isn't announced to screen readers either). */
-.theme-logo--light {
+/* Theme-swapped images: the bright cyan logo (or dark screenshot) for dark, the
+   warm greige logo (or light screenshot) for light. Only the matching variant is
+   shown; the other is display:none (so it isn't announced to screen readers
+   either). Used by the hero/navbar logos and the project card thumbnails. */
+.theme-logo--light,
+.theme-img--light {
     display: none;
 }
 
-:root[data-theme="light"] .theme-logo--dark {
+:root[data-theme="light"] .theme-logo--dark,
+:root[data-theme="light"] .theme-img--dark {
     display: none;
 }
 
-:root[data-theme="light"] .theme-logo--light {
+:root[data-theme="light"] .theme-logo--light,
+:root[data-theme="light"] .theme-img--light {
     display: revert;
 }
 

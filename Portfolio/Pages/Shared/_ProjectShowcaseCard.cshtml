@@ -10,8 +10,17 @@
 	<div class="showcase-card__header">
 		@if (!string.IsNullOrEmpty(Model.ImageUrl))
 		{
-			@* Decorative: the project title is written right below *@
-			<img src="@Model.ImageUrl" alt="" class="showcase-card__logo" />
+			@* Decorative: the project title is written right below. A light-theme
+			   variant swaps in via CSS on the light theme (see .theme-img rules). *@
+			if (!string.IsNullOrEmpty(Model.ImageUrlLight))
+			{
+				<img src="@Model.ImageUrl" alt="" class="showcase-card__logo theme-img theme-img--dark" />
+				<img src="@Model.ImageUrlLight" alt="" class="showcase-card__logo theme-img theme-img--light" />
+			}
+			else
+			{
+				<img src="@Model.ImageUrl" alt="" class="showcase-card__logo" />
+			}
 		}
 		else
 		{

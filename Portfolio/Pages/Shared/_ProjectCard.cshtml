@@ -3,7 +3,16 @@
 	<div class="card">
 		@if (!string.IsNullOrEmpty(Model.ImageUrl))
 		{
-			<img src="@Model.PreviewUrl" alt="Preview of @Model.Title" class="card__image" />
+			@* A light-theme variant swaps in via CSS on the light theme (see .theme-img rules) *@
+			if (!string.IsNullOrEmpty(Model.PreviewUrlLight))
+			{
+				<img src="@Model.PreviewUrl" alt="Preview of @Model.Title" class="card__image theme-img theme-img--dark" />
+				<img src="@Model.PreviewUrlLight" alt="Preview of @Model.Title" class="card__image theme-img theme-img--light" />
+			}
+			else
+			{
+				<img src="@Model.PreviewUrl" alt="Preview of @Model.Title" class="card__image" />
+			}
 		}
 		else
 		{
