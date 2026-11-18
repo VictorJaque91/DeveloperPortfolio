@@ -64,7 +64,9 @@ namespace Portfolio.Services
                     "PocketBase"
                 },
                 LiveDemoUrl = new Uri("https://www.sebekiles.se"),
-                GitHubUrl = new Uri("https://github.com/VictorJaque91/SEBekiles")
+                GitHubUrl = new Uri("https://github.com/VictorJaque91/SEBekiles"),
+                ImageUrl = "/images/sebekiles-logo.webp",
+                PreviewUrl = "/images/sebekiles-preview.webp",
             },
         };
         }
