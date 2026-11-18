@@ -105,8 +105,9 @@ html {
     --color-success-border: rgba(34, 211, 238, 0.4);
 }
 
-/* Light. Darker accents than the dark theme: the bright cyan/purple don't
-   reach 4.5:1 contrast on a light background */
+/* Light. Warm greige accents (not the dark theme's cyan/purple, which look out
+   of place on a light background): kept dark enough for 4.5:1 contrast, both as
+   text and under the white button text on the accent gradient. */
 :root[data-theme="light"] {
     color-scheme: light;
 
@@ -120,22 +121,22 @@ html {
     --color-text-faint: rgba(13, 27, 58, 0.7);
     --color-divider: rgba(13, 27, 58, 0.3);
 
-    --color-accent: #155e75;
-    --color-accent-2: #7e22ce;
+    --color-accent: #7a6b56;
+    --color-accent-2: #574d3f;
     --color-on-accent: #ffffff;
 
     --color-surface: rgba(255, 255, 255, 0.7);
     --color-surface-solid: rgba(255, 255, 255, 0.97);
-    --color-border: rgba(126, 34, 206, 0.25);
-    --color-border-strong: rgba(126, 34, 206, 0.6);
+    --color-border: rgba(87, 77, 63, 0.3);
+    --color-border-strong: rgba(87, 77, 63, 0.6);
     --color-border-neutral: rgba(13, 27, 58, 0.3);
     --color-border-neutral-strong: rgba(13, 27, 58, 0.6);
     --color-shadow: rgba(13, 27, 58, 0.12);
     --color-shadow-strong: rgba(13, 27, 58, 0.18);
 
-    --color-tag-text: #6b21a8;
-    --color-tag-bg: rgba(126, 34, 206, 0.1);
-    --color-tag-border: rgba(126, 34, 206, 0.35);
+    --color-tag-text: #574d3f;
+    --color-tag-bg: rgba(122, 107, 86, 0.14);
+    --color-tag-border: rgba(122, 107, 86, 0.4);
 
     --color-track: rgba(13, 27, 58, 0.12);
 
@@ -243,6 +244,21 @@ body {
     width: min(60%, 300px);
     height: auto;
     margin-bottom: 24px;
+}
+
+/* Theme-swapped logos: the bright cyan logo for dark, the warm greige one for
+   light. Only the matching variant is shown; the other is display:none (so it
+   isn't announced to screen readers either). */
+.theme-logo--light {
+    display: none;
+}
+
+:root[data-theme="light"] .theme-logo--dark {
+    display: none;
+}
+
+:root[data-theme="light"] .theme-logo--light {
+    display: revert;
 }
 
 /* The name is real text (not part of the logo image): it follows the theme,

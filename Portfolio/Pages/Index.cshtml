@@ -7,8 +7,10 @@
 <section class="hero-landing">
     <div class="hero-landing__content">
         @* Decorative: the name is written as real text right below (it used to be part of the image,
-           which made it disappear in the light theme) *@
-        <img src="~/images/vj-logo.webp" alt="" width="960" height="665" class="hero-landing__logo" />
+           which made it disappear in the light theme). Two logo variants, swapped by theme in CSS:
+           the bright cyan one for dark, a warm greige one that reads on the light background. *@
+        <img src="~/images/vj-logo.webp" alt="" width="960" height="665" class="hero-landing__logo theme-logo theme-logo--dark" />
+        <img src="~/images/vj-logo-light.webp" alt="" width="960" height="665" class="hero-landing__logo theme-logo theme-logo--light" />
         <h1 class="hero-landing__name">@Model.Name</h1>
         <p class="hero-landing__tagline">@Model.Role | @string.Join(" | ", Model.Technologies)</p>
         <div class="hero-landing__divider"></div>

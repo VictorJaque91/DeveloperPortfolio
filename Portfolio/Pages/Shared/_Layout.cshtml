@@ -64,7 +64,9 @@
             <div class="container-fluid">
                 <!-- Site logo, links back to the homepage -->
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/vj-logo-small.webp" alt="Victor Jaque, home" width="61" height="42" class="navbar-logo" />
+                    @* Two logo variants, swapped by theme in CSS (see .theme-logo rules) *@
+                    <img src="~/images/vj-logo-small.webp" alt="Victor Jaque, home" width="61" height="42" class="navbar-logo theme-logo theme-logo--dark" />
+                    <img src="~/images/vj-logo-small-light.webp" alt="Victor Jaque, home" width="61" height="42" class="navbar-logo theme-logo theme-logo--light" />
                 </a>
 
                 <!-- Hamburger toggle for mobile/collapsed view. ms-auto pushes it (and the theme
