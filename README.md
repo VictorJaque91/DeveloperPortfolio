@@ -54,7 +54,7 @@ Projects are currently defined in the application's code and passed to the Razor
 
 ### Development Tools
 
-* **Visual Studio 2026**
+* **JetBrains Rider**
 * **Git**
 * **GitHub**
 
@@ -106,8 +106,15 @@ public class Project
 {
     public string Title { get; set; } = "";
     public string Description { get; set; } = "";
-    public string Technologies { get; set; } = "";
+    public List<string> Technologies { get; set; } = new();
+    public Uri? LiveDemoUrl { get; set; }
     public Uri? GitHubUrl { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? PreviewUrl { get; set; }
+
+    // Longer text and highlights for the "Read more" dialog
+    public string Details { get; set; } = "";
+    public List<string> Highlights { get; set; } = new();
 }
 ```
 
@@ -134,7 +141,7 @@ This makes the application easier to maintain and provides a foundation for addi
 Make sure you have the following installed:
 
 * [.NET 10 SDK](https://dotnet.microsoft.com/)
-* Visual Studio 2026 or another compatible .NET development environment
+* JetBrains Rider, Visual Studio, or another compatible .NET development environment
 * Git
 
 ### Clone the repository
