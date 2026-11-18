@@ -10,17 +10,24 @@
     }
 }
 
+/* Smooth scrolling for in-page anchors (hero scroll-down arrow, back to top),
+   but only for users who haven't turned off animations in their OS */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 html {
     font-size: 14px;
-    scroll-behavior: smooth; /* Smooth scrolling for in-page anchors, e.g. the hero scroll-down arrow */
-    background: #0d1b3a;
+    background: var(--color-bg-alt);
 }
 
 /* Default focus ring for form controls and buttons (accessibility) */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
     background-color: black;
-    color: white;
+    color: var(--color-text);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -44,10 +51,107 @@ html {
     --font-mono: 'JetBrains Mono', monospace;
 }
 
+
+/* ==========================================================================
+   THEME COLORS
+   Every color on the site comes from these variables. A theme is just a
+   new set of values for the same variables, so no other rule has to know
+   that themes exist. The theme is set as data-theme on <html> by the small
+   script in _Layout.cshtml (before the page is drawn) and by site.js.
+   ========================================================================== */
+
+/* Dark (default) */
+:root {
+    color-scheme: dark; /* Native parts (scrollbars, form controls) follow the theme */
+
+    --color-bg: #050914;
+    --color-bg-alt: #0d1b3a;
+    --color-bg-deep: #000000;
+
+    --color-text: #ffffff;
+    --color-text-soft: #d8dce6;
+    --color-text-muted: #a9b4d0;
+    --color-text-faint: rgba(255, 255, 255, 0.6);
+    --color-divider: rgba(255, 255, 255, 0.3);
+
+    --color-accent: #22d3ee;
+    --color-accent-2: #a855f7;
+    --gradient-accent: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    /* Text on the accent gradient. Dark text: white on cyan is only 1.8:1,
+       dark navy is 11:1 on cyan and 5:1 on purple */
+    --color-on-accent: #050914;
+
+    --color-surface: rgba(13, 27, 58, 0.55);
+    --color-surface-solid: rgba(8, 14, 32, 0.92);
+    --color-border: rgba(139, 92, 246, 0.25);
+    --color-border-strong: rgba(139, 92, 246, 0.6);
+    --color-border-neutral: rgba(255, 255, 255, 0.25);
+    --color-border-neutral-strong: rgba(255, 255, 255, 0.5);
+    --color-shadow: rgba(0, 0, 0, 0.3);
+    --color-shadow-strong: rgba(0, 0, 0, 0.4);
+
+    --color-tag-text: #d8b4fe;
+    --color-tag-bg: rgba(139, 92, 246, 0.18);
+    --color-tag-border: rgba(139, 92, 246, 0.4);
+
+    --color-track: rgba(255, 255, 255, 0.08);
+
+    --color-error: #f87171;
+    --color-error-text: #fca5a5;
+    --color-error-bg: rgba(248, 113, 113, 0.15);
+    --color-error-border: rgba(248, 113, 113, 0.4);
+    --color-success-text: #a5f3fc;
+    --color-success-bg: rgba(34, 211, 238, 0.15);
+    --color-success-border: rgba(34, 211, 238, 0.4);
+}
+
+/* Light. Darker accents than the dark theme: the bright cyan/purple don't
+   reach 4.5:1 contrast on a light background */
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --color-bg: #f5f7fb;
+    --color-bg-alt: #e6ebf5;
+    --color-bg-deep: #dde4f2;
+
+    --color-text: #0d1b3a;
+    --color-text-soft: #2a3550;
+    --color-text-muted: #4a5675;
+    --color-text-faint: rgba(13, 27, 58, 0.7);
+    --color-divider: rgba(13, 27, 58, 0.3);
+
+    --color-accent: #155e75;
+    --color-accent-2: #7e22ce;
+    --color-on-accent: #ffffff;
+
+    --color-surface: rgba(255, 255, 255, 0.7);
+    --color-surface-solid: rgba(255, 255, 255, 0.97);
+    --color-border: rgba(126, 34, 206, 0.25);
+    --color-border-strong: rgba(126, 34, 206, 0.6);
+    --color-border-neutral: rgba(13, 27, 58, 0.3);
+    --color-border-neutral-strong: rgba(13, 27, 58, 0.6);
+    --color-shadow: rgba(13, 27, 58, 0.12);
+    --color-shadow-strong: rgba(13, 27, 58, 0.18);
+
+    --color-tag-text: #6b21a8;
+    --color-tag-bg: rgba(126, 34, 206, 0.1);
+    --color-tag-border: rgba(126, 34, 206, 0.35);
+
+    --color-track: rgba(13, 27, 58, 0.12);
+
+    --color-error: #b91c1c;
+    --color-error-text: #991b1b;
+    --color-error-bg: rgba(185, 28, 28, 0.08);
+    --color-error-border: rgba(185, 28, 28, 0.4);
+    --color-success-text: #155e75;
+    --color-success-bg: rgba(21, 94, 117, 0.1);
+    --color-success-border: rgba(21, 94, 117, 0.4);
+}
+
 body {
     margin: 0px;
-    background: linear-gradient(180deg, #050914 0%, #0d1b3a 50%, #050914 100%);
-    color: white;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 50%, var(--color-bg) 100%);
+    color: var(--color-text);
     font-family: var(--font-body);
 }
 
@@ -61,8 +165,8 @@ body {
    ========================================================================== */
 
 .navbar-themed {
-    background: linear-gradient(180deg, #0d1b3a 0%, #050914 100%);
-    border-bottom-color: rgba(139, 92, 246, 0.2) !important;
+    background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+    border-bottom-color: var(--color-border) !important;
 }
 
 .navbar-logo {
@@ -72,7 +176,7 @@ body {
 
 /* Base nav link/text colors - monospace, "code style" */
 .nav-item {
-    color: rgb(169, 180, 208);
+    color: var(--color-text-muted);
     text-decoration: none;
     font-family: var(--font-mono);
     font-size: 20px;
@@ -82,16 +186,16 @@ body {
 }
 
 .navbar, .navbar-nav, .nav-link {
-    color: rgb(169, 180, 208);
+    color: var(--color-text-muted);
 }
 
 .navbar-light .navbar-nav .nav-link,
 .navbar-dark .navbar-nav .nav-link {
-    color: rgb(169, 180, 208);
+    color: var(--color-text-muted);
 }
 
 .navbar-brand {
-    color: rgb(169, 180, 208);
+    color: var(--color-text-muted);
     font-size: 25px !important;
     font-weight: 600 !important;
     font-family: var(--font-body) !important;
@@ -99,13 +203,13 @@ body {
 
 /* Highlights whichever page is currently active (set dynamically in _Layout.cshtml) */
 .nav-link.active {
-    color: #22d3ee !important;
+    color: var(--color-accent) !important;
 }
 
 /* The purple "./" in front of the active page, like a path in a terminal */
 .nav-prefix {
     display: none;
-    color: #a855f7;
+    color: var(--color-accent-2);
 }
 
 .nav-link.active .nav-prefix {
@@ -126,7 +230,7 @@ body {
     justify-content: center;
     position: relative;
     text-align: center;
-    background: radial-gradient(ellipse at 50% 35%, #0d1b3a 0%, #050914 55%, #000000 100%);
+    background: radial-gradient(ellipse at 50% 35%, var(--color-bg-alt) 0%, var(--color-bg) 55%, var(--color-bg-deep) 100%);
     padding: 40px 20px;
     /* "Breaks out" of the Bootstrap .container so the hero spans the full
        viewport width, even though it's nested inside the layout's container. */
@@ -136,14 +240,26 @@ body {
 }
 
 .hero-landing__logo {
-    max-width: 480px;
-    width: 90%;
+    width: min(60%, 300px);
     height: auto;
     margin-bottom: 24px;
 }
 
+/* The name is real text (not part of the logo image): it follows the theme,
+   can be zoomed and translated, and is read by screen readers (WCAG 1.4.5).
+   Wide letter spacing to match the look of the old logo text. */
+.hero-landing__name {
+    margin: 0 0 16px;
+    font-size: clamp(1.75rem, 7vw, 3.25rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    padding-left: 0.3em; /* letter-spacing also adds space after the last letter; this evens out the centering */
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
 .hero-landing__tagline {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     font-family: var(--font-mono);
     font-size: 1.05rem;
     letter-spacing: 0;
@@ -155,7 +271,7 @@ body {
     height: 4px;
     border-radius: 2px;
     margin: 0 auto;
-    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    background: var(--gradient-accent);
 }
 
 /* Bouncing "scroll down" button pinned to the bottom of the hero */
@@ -167,19 +283,25 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid rgba(139, 92, 246, 0.6);
+    border: 1px solid var(--color-border-strong);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     text-decoration: none;
     animation: bounce-arrow 2s infinite;
 }
 
     .hero-landing__scroll:hover {
-        color: #ffffff;
-        border-color: #a855f7;
+        color: var(--color-text);
+        border-color: var(--color-accent-2);
     }
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-landing__scroll {
+        animation: none;
+    }
+}
 
 @keyframes bounce-arrow {
     0%, 100% {
@@ -206,19 +328,19 @@ body {
     width: 300px;
     min-height: 280px;
     border-radius: 14px;
-    background: rgba(13, 27, 58, 0.55);
+    background: var(--color-surface);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 30px var(--color-shadow);
     overflow: hidden;
     transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
     .card-shell:hover {
         transform: scale(1.05);
-        border-color: rgba(139, 92, 246, 0.6);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        border-color: var(--color-border-strong);
+        box-shadow: 0 8px 30px var(--color-shadow-strong);
     }
 
 .card {
@@ -237,11 +359,12 @@ body {
     /* Front-of-card fallback icon, shown when a project has no ImageUrl */
     .card svg {
         width: 48px;
-        fill: #ffffff;
+        fill: var(--color-text);
         transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-.card-shell:hover svg {
+.card-shell:hover svg,
+.card-shell:focus-within svg {
     scale: 0;
 }
 
@@ -261,7 +384,7 @@ body {
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: rgba(8, 14, 32, 0.92);
+    background-color: var(--color-surface-solid);
     transform: rotateX(-90deg);
     transform-origin: bottom;
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -269,21 +392,24 @@ body {
     flex-direction: column;
 }
 
-.card-shell:hover .card__content {
+.card-shell:hover .card__content,
+.card-shell:focus-within .card__content {
+    /* focus-within: keyboard users tabbing to the links see the back of the card too,
+       otherwise they would be focusing links that are flipped out of view */
     transform: rotateX(0deg);
 }
 
 .card__title {
     margin: 0;
     font-size: 20px;
-    color: #ffffff;
+    color: var(--color-text);
     font-weight: 700;
 }
 
 .card__description {
     margin: 10px 0 10px;
     font-size: 12px;
-    color: #d8dce6;
+    color: var(--color-text-soft);
     line-height: 1.4;
 }
 
@@ -291,22 +417,22 @@ body {
 .card__button {
     padding: 10px 15px;
     border-radius: 8px;
-    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    background: var(--gradient-accent);
     border: none;
-    color: white;
+    color: var(--color-on-accent);
     text-decoration: none;
 }
 
 /* Source Code / secondary (outline) action button */
 .secondary {
     background: transparent;
-    color: #a9b4d0;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-neutral);
 }
 
     .secondary:hover {
-        color: #ffffff;
-        border-color: rgba(255, 255, 255, 0.5);
+        color: var(--color-text);
+        border-color: var(--color-border-neutral-strong);
     }
 
 
@@ -321,9 +447,9 @@ body {
     padding: 3px 8px;
     margin: 2px;
     border-radius: 20px;
-    background: rgba(139, 92, 246, 0.18);
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    color: #d8b4fe;
+    background: var(--color-tag-bg);
+    border: 1px solid var(--color-tag-border);
+    color: var(--color-tag-text);
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 500;
@@ -338,7 +464,7 @@ body {
 
 .project_technologies {
     margin-top: 10px;
-    color: white;
+    color: var(--color-text);
 }
 
 .project_links {
@@ -375,21 +501,21 @@ body {
 }
 
 .showcase-card {
-    background-color: rgba(13, 27, 58, 0.55);
+    background-color: var(--color-surface);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid var(--color-border);
     border-radius: 14px;
     padding: 45px 35px;
     min-height: 520px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 30px var(--color-shadow);
     display: flex;
     flex-direction: column;
     transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
     .showcase-card:hover {
-        border-color: rgba(139, 92, 246, 0.6);
+        border-color: var(--color-border-strong);
         transform: translateY(-4px);
     }
 
@@ -410,8 +536,8 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #22d3ee, #a855f7);
-    color: white;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+    color: var(--color-on-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,14 +546,14 @@ body {
 }
 
 .showcase-card__title {
-    color: #ffffff;
+    color: var(--color-text);
     font-weight: 700;
     font-size: 22px;
     margin-bottom: 18px;
 }
 
 .showcase-card__description {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     font-size: 14px;
     line-height: 1.8;
     flex-grow: 1; /* Pushes tags/buttons to the bottom regardless of text length */
@@ -443,20 +569,20 @@ body {
 }
 
 .showcase-card__btn--primary {
-    background: linear-gradient(90deg, #22d3ee, #a855f7);
-    color: white;
+    background: var(--gradient-accent);
+    color: var(--color-on-accent);
     border: none;
 }
 
 .showcase-card__btn--secondary {
     background: transparent;
-    color: #a9b4d0;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-neutral);
 }
 
     .showcase-card__btn--secondary:hover {
-        color: #ffffff;
-        border-color: rgba(255, 255, 255, 0.5);
+        color: var(--color-text);
+        border-color: var(--color-border-neutral-strong);
     }
 
 
@@ -465,41 +591,41 @@ body {
    ========================================================================== */
 
 .footer {
-    background: linear-gradient(180deg, #050914 0%, #0d1b3a 100%);
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
     width: 100%;
 }
 
 .footer-text {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-faint);
     font-family: var(--font-body);
 }
 
 .footer-link {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: var(--color-text-faint) !important;
     text-decoration: none;
     font-family: var(--font-body);
     transition: color 0.3s ease;
 }
 
     .footer-link:hover {
-        color: #ffffff !important;
+        color: var(--color-text) !important;
     }
 
 /* Vertical divider "|" between copyright and privacy policy link */
 .footer .mx-2 {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--color-divider);
 }
 
 /* LinkedIn / GitHub icon buttons */
 .social-icon-btn {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-faint);
     font-size: 22px;
     transition: all 0.3s ease;
     display: inline-block;
 }
 
     .social-icon-btn:hover {
-        color: #ffffff;
+        color: var(--color-text);
         transform: translateY(-3px);
     }
 
@@ -511,16 +637,16 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid rgba(139, 92, 246, 0.6);
-    color: #a9b4d0;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text-muted);
     text-decoration: none;
     font-size: 1.1rem;
     transition: all 0.3s ease;
 }
 
     .back-to-top-btn:hover {
-        color: #ffffff;
-        border-color: #a855f7;
+        color: var(--color-text);
+        border-color: var(--color-accent-2);
         transform: translateY(-3px);
     }
 
@@ -528,7 +654,7 @@ body {
         color: inherit !important; /* Overrides the global Bootstrap Icons color rule below */
     }
 
-/* Ensures Bootstrap Icons render correctly and default to white
+/* Ensures Bootstrap Icons render correctly and default to the text color
    (overridden selectively where needed, e.g. .back-to-top-btn i above) */
 .bi, [class^="bi-"], [class*=" bi-"] {
     font-family: "bootstrap-icons" !important;
@@ -538,7 +664,7 @@ body {
     text-transform: none !important;
     line-height: 1 !important;
     display: inline-block !important;
-    color: #ffffff !important;
+    color: var(--color-text) !important;
 }
 
 /* ==========================================================================
@@ -561,8 +687,8 @@ body {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    background: rgba(13, 27, 58, 0.55);
-    border: 2px solid rgba(139, 92, 246, 0.4);
+    background: var(--color-surface);
+    border: 2px solid var(--color-tag-border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -571,7 +697,7 @@ body {
 
     .about-photo-placeholder i {
         font-size: 72px;
-        color: #a9b4d0;
+        color: var(--color-text-muted);
     }
 
 .about-intro__title {
@@ -580,7 +706,7 @@ body {
 }
 
 .about-intro__subtitle {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     font-size: 1.05rem;
 }
 
@@ -588,7 +714,7 @@ body {
     max-width: 700px;
     margin: 20px auto 60px;
     padding: 0 20px;
-    color: #d8dce6;
+    color: var(--color-text-soft);
     line-height: 1.8;
     font-size: 1.05rem;
 }
@@ -603,10 +729,10 @@ body {
 }
 
 .about-highlight-card {
-    background: rgba(13, 27, 58, 0.55);
+    background: var(--color-surface);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid var(--color-border);
     border-radius: 14px;
     padding: 25px 20px;
     text-align: center;
@@ -614,13 +740,13 @@ body {
 
     .about-highlight-card i {
         font-size: 28px;
-        color: #22d3ee;
+        color: var(--color-accent);
         margin-bottom: 12px;
         display: block;
     }
 
     .about-highlight-card p {
-        color: #a9b4d0;
+        color: var(--color-text-muted);
         font-size: 13px;
         line-height: 1.5;
         margin: 0;
@@ -660,7 +786,7 @@ body {
 }
 
 .skills__intro {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     text-align: center;
     max-width: 60ch;
     margin: 0 auto 30px;
@@ -674,17 +800,17 @@ body {
 }
 
 .skill-category {
-    background: rgba(13, 27, 58, 0.55);
+    background: var(--color-surface);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid var(--color-border);
     border-radius: 14px;
     padding: 25px;
 }
 
 .skill-category__title {
     font-size: 1.2rem;
-    color: #22d3ee;
+    color: var(--color-accent);
     margin-bottom: 18px;
 }
 
@@ -706,18 +832,18 @@ body {
 }
 
 .skill__name {
-    color: #d8dce6;
+    color: var(--color-text-soft);
     font-weight: 500;
 }
 
 .skill__level {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
 }
 
 .skill__track {
     height: 10px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--color-track);
     border-radius: 999px;
     overflow: hidden;
 }
@@ -726,7 +852,7 @@ body {
    Without JavaScript the bars are simply shown full - nothing breaks. */
 .skill__fill {
     height: 100%;
-    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    background: var(--gradient-accent);
     border-radius: inherit;
     transform-origin: left;
     transform: scaleX(var(--skill-scale));
@@ -755,7 +881,7 @@ body {
 }
 
 .contact-subtitle {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
 }
 
 .contact-layout {
@@ -777,24 +903,24 @@ body {
 }
 
     .contact-field label {
-        color: #a9b4d0;
+        color: var(--color-text-muted);
         font-size: 14px;
         font-weight: 500;
     }
 
 .contact-input {
-    background: rgba(13, 27, 58, 0.55);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 12px 14px;
-    color: white;
+    color: var(--color-text);
     font-family: var(--font-body);
     font-size: 14px;
 }
 
+    /* The ring itself comes from the global :focus-visible rule */
     .contact-input:focus {
-        outline: none;
-        border-color: rgba(139, 92, 246, 0.7);
+        border-color: var(--color-border-strong);
     }
 
 .contact-textarea {
@@ -802,7 +928,7 @@ body {
 }
 
 .contact-error {
-    color: #f87171;
+    color: var(--color-error);
     font-size: 12px;
 }
 
@@ -820,15 +946,15 @@ body {
 }
 
 .contact-alert--success {
-    background: rgba(34, 211, 238, 0.15);
-    border: 1px solid rgba(34, 211, 238, 0.4);
-    color: #a5f3fc;
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success-border);
+    color: var(--color-success-text);
 }
 
 .contact-alert--error {
-    background: rgba(248, 113, 113, 0.15);
-    border: 1px solid rgba(248, 113, 113, 0.4);
-    color: #fca5a5;
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
+    color: var(--color-error-text);
 }
 
 .contact-links {
@@ -841,18 +967,18 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(13, 27, 58, 0.55);
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     padding: 14px 24px;
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     text-decoration: none;
     transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
     .contact-link-card:hover {
-        color: #ffffff;
-        border-color: rgba(139, 92, 246, 0.6);
+        color: var(--color-text);
+        border-color: var(--color-border-strong);
         transform: translateY(-3px);
     }
 
@@ -876,14 +1002,228 @@ body {
 }
 
 .legal-page__updated {
-    color: #a9b4d0;
+    color: var(--color-text-muted);
     font-size: 13px;
     margin-bottom: 30px;
 }
 
 .legal-page h2 {
-    color: #ffffff;
+    color: var(--color-text);
     font-size: 1.25rem;
     margin-top: 30px;
     margin-bottom: 10px;
 }
+
+
+/* ==========================================================================
+   ACCESSIBILITY HELPERS
+   ========================================================================== */
+
+/* One visible focus ring for everything you can tab to */
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Skip link: hidden above the screen, slides in when it gets keyboard focus (WCAG 2.4.1).
+   Not display:none, because then it couldn't be tabbed to. */
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 2000;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--color-on-accent);
+    background: var(--gradient-accent);
+    border-radius: 8px;
+    text-decoration: none;
+    transform: translateY(-200%);
+}
+
+    .skip-link:focus {
+        transform: translateY(0);
+        color: var(--color-on-accent);
+    }
+
+/* main and the nav only get focus from the skip link / back-to-top link.
+   They are not interactive, so no focus ring. */
+main:focus,
+#top:focus {
+    outline: none;
+}
+
+
+/* ==========================================================================
+   THEME TOGGLE (navbar)
+   ========================================================================== */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 0.5rem;
+    padding: 0;
+    font-size: 1.25rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+    .theme-toggle:hover {
+        background: var(--color-tag-bg);
+    }
+
+    .theme-toggle i {
+        color: var(--color-text-muted) !important; /* Overrides the global Bootstrap Icons color rule */
+    }
+
+    .theme-toggle:hover i {
+        color: var(--color-text) !important;
+    }
+
+/* Show the icon for the theme you would switch TO. Done in CSS (not JS),
+   so the right icon is there from the first paint. */
+.theme-toggle__moon,
+:root[data-theme="light"] .theme-toggle__sun {
+    display: none !important;
+}
+
+:root[data-theme="light"] .theme-toggle__moon {
+    display: inline-block !important;
+}
+
+/* Bootstrap's .navbar-dark draws a light hamburger icon; make it dark in the light theme */
+.navbar-themed .navbar-toggler {
+    border-color: var(--color-border-strong);
+}
+
+:root[data-theme="light"] .navbar-themed .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* ==========================================================================
+   PROJECT FILTER (Projects page)
+   The buttons are rendered with the hidden attribute and shown by site.js,
+   so visitors without JavaScript don't see buttons that do nothing.
+   ========================================================================== */
+
+.project-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 16px;
+    padding: 0 20px;
+    list-style: none;
+}
+
+.project-filter__button {
+    min-height: 44px;
+    padding: 0 16px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: 1px solid var(--color-border-neutral);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+    .project-filter__button:hover {
+        color: var(--color-text);
+        border-color: var(--color-border-neutral-strong);
+    }
+
+    /* The active filter is styled from the aria state, so the look and
+       what screen readers hear can never disagree */
+    .project-filter__button[aria-pressed="true"] {
+        color: var(--color-on-accent);
+        background: var(--gradient-accent);
+        border-color: transparent;
+    }
+
+.project-filter__count {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: 30px;
+}
+
+
+/* ==========================================================================
+   PROJECT DIALOG ("Read more", Projects page)
+   Native <dialog> opened with showModal(): focus is trapped inside,
+   Escape closes it, and the page behind becomes inert.
+   ========================================================================== */
+
+.showcase-card__more {
+    font-family: var(--font-body);
+    cursor: pointer;
+}
+
+.project-dialog {
+    width: min(92vw, 640px);
+    max-height: 85vh;
+    padding: 0; /* Padding is on the inner div, so a click on the dialog element itself is a backdrop click */
+    color: var(--color-text);
+    background: var(--color-surface-solid);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 14px;
+    box-shadow: 0 8px 30px var(--color-shadow-strong);
+}
+
+    .project-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+    }
+
+.project-dialog__content {
+    padding: 32px;
+}
+
+.project-dialog__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.project-dialog__details {
+    color: var(--color-text-soft);
+    line-height: 1.7;
+}
+
+.project-dialog__subtitle {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin: 24px 0 10px;
+}
+
+.project-dialog__highlights {
+    color: var(--color-text-soft);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+}
+
+.project-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.project-dialog__close {
+    margin-left: auto;
+    font-family: var(--font-body);
+    cursor: pointer;
+}
+
+/* Stop the page behind an open dialog from scrolling */
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+

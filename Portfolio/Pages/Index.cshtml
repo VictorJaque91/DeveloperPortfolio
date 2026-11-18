@@ -6,12 +6,15 @@
 <!-- Hero Landing page. First section with my logo and my techniques -->
 <section class="hero-landing">
     <div class="hero-landing__content">
-        <img src="~/images/vj-logo-full.png" alt="Victor Jaque" class="hero-landing__logo" />
+        @* Decorative: the name is written as real text right below (it used to be part of the image,
+           which made it disappear in the light theme) *@
+        <img src="~/images/vj-logo.webp" alt="" width="960" height="665" class="hero-landing__logo" />
+        <h1 class="hero-landing__name">@Model.Name</h1>
         <p class="hero-landing__tagline">@Model.Role | @string.Join(" | ", Model.Technologies)</p>
         <div class="hero-landing__divider"></div>
     </div>
-    <a href="#featured-projects" class="hero-landing__scroll" aria-label="Scrolla ner">
-        <i class="bi bi-chevron-down"></i>
+    <a href="#featured-projects" class="hero-landing__scroll" aria-label="Scroll to my projects">
+        <i class="bi bi-chevron-down" aria-hidden="true"></i>
     </a>
 </section>
 <!-- Second part of page with my flipping project cards-->

@@ -3,11 +3,11 @@
 	<div class="card">
 		@if (!string.IsNullOrEmpty(Model.ImageUrl))
 		{
-			<img src="@Model.PreviewUrl" alt="@Model.Title förhandsvisning" class="card__image" />
+			<img src="@Model.PreviewUrl" alt="Preview of @Model.Title" class="card__image" />
 		}
 		else
 		{
-			<div class="showcase-card__logo-placeholder">@Model.Title.Substring(0, 1)</div>
+			<div class="showcase-card__logo-placeholder" aria-hidden="true">@Model.Title.Substring(0, 1)</div>
 		}
 			<div class="card__content">
 				<h3 class="card__title">@Model.Title</h3>
@@ -26,7 +26,7 @@
 						target="_blank"
 						rel="noopener noreferrer"
 						class="card__button">
-						Live Demo
+						Live Demo<span class="visually-hidden"> of @Model.Title (opens in a new tab)</span>
 						</a>
 					}		
 					@if (Model.GitHubUrl is not null)
@@ -35,7 +35,7 @@
 						target="_blank"
 						rel="noopener noreferrer"
 						class="card__button secondary">
-						Source Code
+						Source Code<span class="visually-hidden"> of @Model.Title (opens in a new tab)</span>
 						</a>
 						}
 				</div>

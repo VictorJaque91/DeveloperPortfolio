@@ -1,10 +1,21 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/svg+xml" href="/images/vj-logo.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Portfolio</title>
+
+    <!-- Theme: runs before the page is drawn, so there is no flash of the wrong theme.
+         A choice saved earlier wins, otherwise the OS setting. site.js takes over from here. -->
+    <script>
+        try {
+            const saved = localStorage.getItem("theme");
+            const light = saved ? saved === "light" : matchMedia("(prefers-color-scheme: light)").matches;
+            document.documentElement.dataset.theme = light ? "light" : "dark";
+        } catch {
+            document.documentElement.dataset.theme = "dark";
+        }
+    </script>
     <script type="importmap"></script>
 
     <!-- Favicon -->
@@ -31,6 +42,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- First tab stop: lets keyboard users jump past the navigation (WCAG 2.4.1) -->
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     @{
         // Current Razor Page route, e.g. "/Projects" - used to mark the active nav link
         var currentPage = ViewContext.RouteData.Values["page"] as string;
@@ -44,22 +58,25 @@
         };
     }
     <header>
-        <!-- Main navigation bar. id="top" is the scroll target for the
-             "back to top" button in the footer. -->
-        <nav id="top" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark navbar-themed border-bottom box-shadow">
+        <!-- Main navigation bar. id="top" is the target of the "back to top" link in the footer.
+             tabindex="-1" lets that link move keyboard focus here, not just scroll. -->
+        <nav id="top" tabindex="-1" aria-label="Main navigation" class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark navbar-themed border-bottom box-shadow">
             <div class="container-fluid">
                 <!-- Site logo, links back to the homepage -->
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/vj-logo.png" alt="Victor Jaque logotyp" class="navbar-logo" />
+                    <img src="~/images/vj-logo-small.webp" alt="Victor Jaque, home" width="61" height="42" class="navbar-logo" />
                 </a>
 
-                <!-- Hamburger toggle for mobile/collapsed view -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <!-- Hamburger toggle for mobile/collapsed view. ms-auto pushes it (and the theme
+                     toggle after it) to the right on small screens. -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+                <!-- order-last: on small screens the open menu always gets its own row at the bottom.
+                     order-lg-0: on desktop it goes back to DOM order, so the theme toggle ends up far right. -->
+                <div id="navbarSupportedContent" class="navbar-collapse collapse d-lg-inline-flex justify-content-between order-last order-lg-0">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         @* One link per item in navItems. The active page gets the "active" class,
                            aria-current="page" for screen readers, and a "./" prefix
@@ -77,13 +94,21 @@
                         }
                     </ul>
                 </div>
+
+                <!-- Theme toggle. Last in the DOM so the tab order matches what you see on desktop.
+                     CSS shows the icon for the theme you'd switch to; site.js sets the label. -->
+                <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+                    <i class="bi bi-sun theme-toggle__sun" aria-hidden="true"></i>
+                    <i class="bi bi-moon theme-toggle__moon" aria-hidden="true"></i>
+                </button>
             </div>
         </nav>
     </header>
 
     <!-- Main content area. Each Razor Page's markup is injected here via RenderBody(). -->
     <div class="container">
-        <main role="main" class="pb-3">
+        <!-- id + tabindex="-1": target of the skip link, and lets it actually move focus here -->
+        <main id="main-content" tabindex="-1" class="pb-3">
             @RenderBody()
         </main>
     </div>
@@ -102,18 +127,23 @@
 
                 <!-- Center: Social media links (LinkedIn, GitHub) -->
                 <div class="col-md-4 text-center mb-3 mb-md-0">
-                    <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" class="social-icon-btn mx-2" title="LinkedIn">
-                        <i class="bi bi-linkedin"></i>
+                    @* Icon-only links: the hidden text is the link's name for screen readers *@
+                    <a href="https://www.linkedin.com/in/victor-jaque-51214720a" target="_blank" rel="noopener noreferrer" class="social-icon-btn mx-2" title="LinkedIn">
+                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        <span class="visually-hidden">LinkedIn (opens in a new tab)</span>
                     </a>
-                    <a href="https://github.com/VictorJaque91" target="_blank" class="social-icon-btn mx-2" title="GitHub">
-                        <i class="bi bi-github"></i>
+                    <a href="https://github.com/VictorJaque91" target="_blank" rel="noopener noreferrer" class="social-icon-btn mx-2" title="GitHub">
+                        <i class="bi bi-github" aria-hidden="true"></i>
+                        <span class="visually-hidden">GitHub (opens in a new tab)</span>
                     </a>
                 </div>
 
-                <!-- Right: Back-to-top button, scrolls to the nav's id="top" anchor -->
+                <!-- Right: Back-to-top link. Works without JavaScript: it jumps to the nav's id="top",
+                     and since the nav has tabindex="-1", keyboard focus moves there too. -->
                 <div class="col-md-4 text-center text-md-end">
-                    <a href="#top" class="back-to-top-btn" title="Tillbaka till toppen">
-                        <i class="bi bi-chevron-up"></i>
+                    <a href="#top" class="back-to-top-btn" title="Back to top">
+                        <i class="bi bi-chevron-up" aria-hidden="true"></i>
+                        <span class="visually-hidden">Back to top</span>
                     </a>
                 </div>
 
