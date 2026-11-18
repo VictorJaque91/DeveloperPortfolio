@@ -22,7 +22,11 @@
                 observer.unobserve(entry.target); // animate only once
             }
         });
-    }, { threshold: 0.3 });
+        // rootMargin pulls the trigger line 25% up from the bottom of the viewport,
+        // so the bars fill as you scroll them into view - not the instant the section
+        // merely peeks in at the bottom on load. A percentage (not a fixed px) scales
+        // with the window, so even very tall windows wait for a real scroll.
+    }, { threshold: 0, rootMargin: "0px 0px -25% 0px" });
 
     categories.forEach((category) => {
         category.classList.add("is-pending");
