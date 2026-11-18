@@ -469,7 +469,7 @@ body {
 
 .project_links {
     display: flex;
-    gap: 10px;
+    gap: 8px; /* Keep all buttons on one row, even when there are three */
     margin-top: 5px;
 }
 
@@ -488,7 +488,9 @@ body {
     padding: 0 20px 60px;
 }
 
-@media (max-width: 991px) {
+/* Drop to two columns below 1200px: three columns only when the cards are wide
+   enough to fit all three action buttons on one row with comfortable spacing. */
+@media (max-width: 1199px) {
     .project-showcase-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -560,12 +562,16 @@ body {
 }
 
 .showcase-card__btn {
-    padding: 10px 15px;
+    flex: 1 1 0; /* Every button gets an equal share of the row, so they're all the same width */
+    min-width: 0; /* Allow the equal split to shrink the buttons instead of overflowing the card */
+    max-width: 50%; /* A lone button stops at half width instead of filling the whole row */
+    padding: 10px 12px;
     border-radius: 8px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     text-align: center;
+    white-space: nowrap; /* Never break a label like "Read more" onto two lines */
 }
 
 .showcase-card__btn--primary {
