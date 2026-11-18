@@ -1,17 +1,24 @@
 ﻿@model Portfolio.Models.Project
+@{
+    // Unique ids for this project's dialog and its title (used by aria-labelledby)
+    var dialogId = $"project-dialog-{Model.Slug}";
+    var dialogTitleId = $"{dialogId}-title";
+}
 
-<div class="showcase-card">
+@* data-technologies: read by the filter in site.js, e.g. "C#|.NET|WPF" *@
+<div class="showcase-card" data-technologies="@(string.Join("|", Model.Technologies))">
 	<div class="showcase-card__header">
 		@if (!string.IsNullOrEmpty(Model.ImageUrl))
 		{
-			<img src="@Model.ImageUrl" alt="@Model.Title logotyp" class="showcase-card__logo" />
+			@* Decorative: the project title is written right below *@
+			<img src="@Model.ImageUrl" alt="" class="showcase-card__logo" />
 		}
 		else
 		{
-			<div class="showcase-card__logo-placeholder">@Model.Title.Substring(0, 1)</div>
+			<div class="showcase-card__logo-placeholder" aria-hidden="true">@Model.Title.Substring(0, 1)</div>
 		}
 	</div>
-	<h3 class="showcase-card__title">@Model.Title</h3>
+	<h2 class="showcase-card__title">@Model.Title</h2>
 	<p class="showcase-card__description">@Model.Description</p>
 	@if (Model.Technologies.Any())
 	{
@@ -24,14 +31,83 @@
 	}
 
 	<div class="project_links">
-		 @if (Model.LiveDemoUrl != null)
-    {
-        <a href="@Model.LiveDemoUrl" target="_blank" class="showcase-card__btn showcase-card__btn--primary">Live Demo</a>
-    }
-    @if (Model.GitHubUrl != null)
-    {
-        <a href="@Model.GitHubUrl" target="_blank" class="showcase-card__btn showcase-card__btn--secondary">GitHub</a>
-    }
+		@if (Model.HasMoreInfo)
+		{
+			@* Hidden until site.js wires it up: without JavaScript it couldn't open the dialog *@
+			<button type="button"
+					class="showcase-card__btn showcase-card__btn--secondary showcase-card__more"
+					data-open-dialog="@dialogId"
+					aria-haspopup="dialog"
+					hidden>
+				Read more<span class="visually-hidden"> about @Model.Title</span>
+			</button>
+		}
+		@if (Model.LiveDemoUrl != null)
+		{
+			<a href="@Model.LiveDemoUrl" target="_blank" rel="noopener noreferrer" class="showcase-card__btn showcase-card__btn--primary">
+				Live Demo<span class="visually-hidden"> of @Model.Title (opens in a new tab)</span>
+			</a>
+		}
+		@if (Model.GitHubUrl != null)
+		{
+			<a href="@Model.GitHubUrl" target="_blank" rel="noopener noreferrer" class="showcase-card__btn showcase-card__btn--secondary">
+				GitHub<span class="visually-hidden"> repository for @Model.Title (opens in a new tab)</span>
+			</a>
+		}
 	</div>
 </div>
 
+@if (Model.HasMoreInfo)
+{
+	@* Opened with showModal() in site.js. The padding sits on the inner div,
+	   so a click on the dialog element itself is a click on the backdrop. *@
+	<dialog id="@dialogId" class="project-dialog" aria-labelledby="@dialogTitleId">
+		<div class="project-dialog__content">
+			<h2 id="@dialogTitleId" class="project-dialog__title">@Model.Title</h2>
+
+			@if (!string.IsNullOrWhiteSpace(Model.Details))
+			{
+				<p class="project-dialog__details">@Model.Details</p>
+			}
+
+			@if (Model.Highlights.Count > 0)
+			{
+				<h3 class="project-dialog__subtitle">Highlights</h3>
+				<ul class="project-dialog__highlights">
+					@foreach (var highlight in Model.Highlights)
+					{
+						<li>@highlight</li>
+					}
+				</ul>
+			}
+
+			@if (Model.Technologies.Any())
+			{
+				<div class="technology-list">
+					@foreach (var technology in Model.Technologies)
+					{
+						<span class="technology">@technology</span>
+					}
+				</div>
+			}
+
+			<div class="project-dialog__actions">
+				@if (Model.LiveDemoUrl != null)
+				{
+					<a href="@Model.LiveDemoUrl" target="_blank" rel="noopener noreferrer" class="showcase-card__btn showcase-card__btn--primary">
+						Live Demo<span class="visually-hidden"> (opens in a new tab)</span>
+					</a>
+				}
+				@if (Model.GitHubUrl != null)
+				{
+					<a href="@Model.GitHubUrl" target="_blank" rel="noopener noreferrer" class="showcase-card__btn showcase-card__btn--secondary">
+						GitHub<span class="visually-hidden"> (opens in a new tab)</span>
+					</a>
+				}
+				<button type="button" class="showcase-card__btn showcase-card__btn--secondary project-dialog__close" data-close-dialog>
+					Close
+				</button>
+			</div>
+		</div>
+	</dialog>
+}

@@ -9,6 +9,10 @@ namespace Portfolio.Pages
     {
         public List<Project> Projects { get; set; } = new();
 
+        // Every technology used in any project, once each, in the order they first appear.
+        // Used for the filter buttons.
+        public List<string> Technologies { get; set; } = new();
+
         private readonly ProjectService _projectService;
         public ProjectsModel(ProjectService projectService)
         {
@@ -17,6 +21,7 @@ namespace Portfolio.Pages
         public void OnGet()
         {
             Projects = _projectService.GetProjects();
+            Technologies = Projects.SelectMany(p => p.Technologies).Distinct().ToList();
         }
     }
 }

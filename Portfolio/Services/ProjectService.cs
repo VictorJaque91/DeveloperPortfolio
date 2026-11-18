@@ -20,8 +20,13 @@ namespace Portfolio.Services
                 },
                 LiveDemoUrl = new Uri("https://victorjaque.site"),
                 GitHubUrl = new Uri("https://github.com/VictorJaque91/DeveloperPortfolio"),
-                ImageUrl = "/images/vj-logo.png",
-                PreviewUrl = "/images/portfolio-preview.png"
+                ImageUrl = "/images/vj-logo-small.webp",
+                PreviewUrl = "/images/portfolio-preview.webp",
+                Details = "I built this website in C# with ASP.NET Razor Pages. It was my first project beyond console applications, which was a real challenge.",
+                Highlights = new List<string>
+                {
+                    "I'm proud that I managed to host it on my own home server"
+                }
             },
             new Project
             {
